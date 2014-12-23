@@ -1,0 +1,25 @@
+{
+  "name": "pekoe-common",
+  "version": "0.0.0",
+  "authors": [
+    "Alister Pillow <gspringtech@gmail.com>"
+  ],
+  "description": "support functions for Pekoe Job Manager",
+  "main": "index.html",
+  "keywords": [
+    "list",
+    "auth",
+    "jquery",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "homepage": "http://pekoe.io",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

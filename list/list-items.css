@@ -1,0 +1,213 @@
+/* The LIST-mode appearance  */
+/* XML file table row appearance. (Double-click to edit) */
+html {padding: 5px;}
+.xml {
+
+}
+.new {
+
+}
+
+/*.xml td:first-child {*/
+    /*background-image:url(pekoe-form.png);*/
+    /*background-position: center left;*/
+    /*background-repeat: no-repeat;*/
+    /*padding-left:22px !important;*/
+/*}*/
+
+/*.xml.new td:first-child {*/
+    /*background-image:url(../graphics/icons/page_add.png);*/
+/*}*/
+
+/* Search form */
+.search {
+
+}
+/*.search td:first-child  {*/
+    /*background-image:url(../graphics/icons/page_white_magnify.png);*/
+    /*background-position: center left;*/
+    /*background-repeat: no-repeat;*/
+    /*padding-left:22px !important;*/
+/*}*/
+
+/* XQL file table row appearance. (Double-click to run program - should return a list.) */
+.xql {
+
+}
+/*.xql td:first-child  {*/
+    /*background-image:url(../graphics/icons/folder_database.png);*/
+    /*background-position: center left;*/
+    /*background-repeat: no-repeat;*/
+    /*padding-left:22px !important;*/
+/*}*/
+
+/* Collection background - essentially a folder. (Double-click to view contents) */
+.collection {
+
+}
+.collection td:first-child  {
+
+}
+.collection:hover td:first-child {
+
+}
+
+.row-edit   {background-image: url(../graphics/icons/page_edit.png);}
+.row-delete {background-image: url(../graphics/icons/delete.png);   }
+.table-refresh {
+    background-image: url(../graphics/icons/table_refresh.png);
+}
+.bookmark-delete {
+    list-style-image: url(../graphics/icons/delete.png);
+    list-style-position: outside;
+}
+.row-bookmark {background-image: url(../graphics/icons/folder_star.png);}
+
+
+.locked {
+    color:#DCA65A;
+    background-color:#ECE5D7;
+}
+.locked-by-me {
+    color:red;
+    background-color:#FFCC99;
+}
+tr.header {
+    height: 2em;
+    background-color: #FAFAFA;
+}
+.number div {
+    text-align: right;
+}
+tr[data-href] {cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.breadcrumb {
+    text-transform: capitalize;
+}
+.glyphicon {
+    margin-right: 0.5em;
+}
+
+.btn {
+    text-transform: uppercase;
+    color: #f36007;
+}
+/* CSS Document */
+
+/*
+
+Icons are font based so you can change the size and colour as needed.
+
+Glyphicons used:
+glyphicon glyphicon-plus *** add new folder, etc ***
+glyphicon glyphicon-search
+glyphicon glyphicon-remove  *** delete ***
+glyphicon glyphicon-file *** save/accept new bookmarks ***
+glyphicon glyphicon-refresh
+glyphicon glyphicon-bookmark
+glyphicon glyphicon-edit *** edit bookmarks ***
+glyphicon glyphicon-remove-circle *** close a tab ***
+glyphicon glyphicon-folder-close
+glyphicon glyphicon-folder-open
+glyphicon glyphicon-log-out
+glyphicon glyphicon-new-window
+glyphicon glyphicon-floppy-disk *** save bookmarks ***
+glyphicon glyphicon-floppy-remove **** revert/discard changes to bookmarks ****
+
+
+*************************
+Colours
+Orange { color:#f36007; }
+Light Grey { color:#999; }
+Dark Grey { color:#333; }
+*************************
+*/
+
+p, body
+{
+    font-family: "proxima-nova", Helvetica, Arial, sans-serif;
+    font-size:16px;
+    font-weight:400;
+}
+
+
+
+/* Remove border radius from all buttons, accordions, search boxes etc that have rounded corners, add the class names to this */
+.panel-heading, .btn
+{
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    border-bottom-left-radius:0;
+    border-bottom-right-radius:0;
+}
+
+.btn
+{
+    border:1px solid #f36007;
+    margin-right:2px;
+}
+
+.btn-default
+{
+    border-color:#f36007;
+}
+
+
+
+a:link, a:visited { color:#f36007; }
+a:hover, a:active { text-decoration:underline; }
+
+.tableRowHover { background-color:#ebebeb; }
+.tableRowSelected { background-color:#f36007; }
+
+.tabHeadings
+{
+    color:#666;
+    font-size:24px;
+    font-weight:100;
+}
+
+.activeTabHeading
+{
+    background-color:#f36007;
+    color:#fff;
+}
+
+thead {
+    color: white;
+    background-color: #666;
+}
+
+th {
+    color: white;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+td {
+    color: #666;
+    background-color: inherit;
+}
+
+i {
+    font-size: larger;
+}
+
+tr:hover {
+    background-color: #999;
+    color: white;
+}
+tr:hover td { color: white;}
+tr.active, tr.active td {
+    background-color: #f36007 !important;
+    color: white;
+}
+tr.active i.off {
+    display: inline;
+}
+
+tr.active i.on {
+    display: block;
+}
