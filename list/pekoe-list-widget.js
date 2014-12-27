@@ -67,14 +67,17 @@ $(function () {
     $('.menuitem').on('click',function (){
         var action = $(this).text().toLowerCase();
         var data = {action: action};
-        var item = tabInfo(activeItem());
+        var $tr = activeItem();
+        var item = tabInfo($tr);
         data.path = item.path;
         console.log('Going to ',action, data.path);
+        if (action === 'delete' && !confirm("Are you sure?")) return true;
         $.get(location.pathname, data).then(function (data, textStatus, jqXHR) {
             if (jqXHR.getResponseHeader('Location')) {
                 location.href = jqXHR.getResponseHeader('Location');
             }
         });
+        $tr.find('td:first').html('<i class="fa fa-spinner fa-6"></i>');
     });
 
     $('#refresh').on('click', function () {
@@ -102,18 +105,18 @@ $(function () {
         location.href = tab.href;
     };
 
-    // all the 'p-needs-selection' buttons should really do a get with their name as action
-    $('unlockItem').on("click",function () {
-        var data = {action: 'unlock'};
-        var item = tabInfo(activeItem());
-        data.path = item.path;
-        console.log('Going to unlock ', data.path);
-        $.get(location.pathname, data).then(function (data, textStatus, jqXHR) {
-            if (jqXHR.getResponseHeader('Location')) {
-                location.href = jqXHR.getResponseHeader('Location');
-            }
-        });
-    });
+    //// all the 'p-needs-selection' buttons should really do a get with their name as action
+    //$('unlockItem').on("click",function () {
+    //    var data = {action: 'unlock'};
+    //    var item = tabInfo(activeItem());
+    //    data.path = item.path;
+    //    console.log('Going to unlock ', data.path);
+    //    $.get(location.pathname, data).then(function (data, textStatus, jqXHR) {
+    //        if (jqXHR.getResponseHeader('Location')) {
+    //            location.href = jqXHR.getResponseHeader('Location');
+    //        }
+    //    });
+    //});
 
     // Buttons
     $('#openItem').on('click', function (e) {
@@ -127,17 +130,17 @@ $(function () {
     $('#bookmarkItem').on('click', function () {
 
     });
-    $('#deleteItem').on('click', function () {
-        var data = {action: 'delete'};
-        var item = tabInfo(activeItem());
-        data.path = item.path;
-        console.log('Going to delete ', data.path);
-        $.post(location.pathname, data).then(function (data, textStatus, jqXHR) {
-            if (jqXHR.getResponseHeader('Location')) {
-                location.href = jqXHR.getResponseHeader('Location');
-            }
-        });
-    });
+    //$('#deleteItem').on('click', function () {
+    //    var data = {action: 'delete'};
+    //    var item = tabInfo(activeItem());
+    //    data.path = item.path;
+    //    console.log('Going to delete ', data.path);
+    //    $.post(location.pathname, data).then(function (data, textStatus, jqXHR) {
+    //        if (jqXHR.getResponseHeader('Location')) {
+    //            location.href = jqXHR.getResponseHeader('Location');
+    //        }
+    //    });
+    //});
 
     // row-click actions
     $('tr[data-href]')
