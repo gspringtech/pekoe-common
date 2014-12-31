@@ -64,20 +64,37 @@ $(function () {
     var updateControls = function () {
         controlsForSelection.removeAttr('disabled');
     };
-    $('.menuitem').on('click',function (){
-        var action = $(this).text().toLowerCase();
-        var data = {action: action};
+    // generic menu handler. Each action should be an "a href" with data-action=unlock and possibly data-params=item,item data-confirm=yes
+    // I might change GET for POST.
+    // each action should return a redirect so that the action can't be repeated.
+    $('.menuitem').on('click',function (e){
+        e.preventDefault();
+        //var action = $(this).text().toLowerCase(); // or what about the url?
+        var $this = $(this);
+        var href = $this.attr('href');
+        var params = $this.data('params');
+        var action = $this.data('action');
         var $tr = activeItem();
         var item = tabInfo($tr);
-        data.path = item.path;
+        var thePath = item.path;
+        var confirmationRequired = $this.data('confirm'); // this could be a question
+        if (confirmationRequired) {
+            if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;}
+        }
+        var data = {action: action, path: thePath};
+
         console.log('Going to ',action, data.path);
-        if (action === 'delete' && !confirm("Are you sure?")) return true;
-        $.get(location.pathname, data).then(function (data, textStatus, jqXHR) {
-            if (jqXHR.getResponseHeader('Location')) {
-                location.href = jqXHR.getResponseHeader('Location');
-            }
-        });
         $tr.find('td:first').html('<i class="fa fa-spinner fa-6"></i>');
+        //if (action === 'delete' && !confirm("Are you sure?")) return true;
+        console.log('going to href',href, 'with params', $.param(data));
+        location.href = href + '?' + $.param(data);
+
+        //$.get(href, data).then(function (data, textStatus, jqXHR) {
+        //    if (jqXHR.getResponseHeader('Location')) {
+        //        location.href = jqXHR.getResponseHeader('Location');
+        //    }
+        //});
+        //
     });
 
     $('#refresh').on('click', function () {

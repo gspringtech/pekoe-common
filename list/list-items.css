@@ -52,6 +52,8 @@ html {padding: 5px;}
 
 }
 
+table {margin-top: 10px;}
+
 .row-edit   {background-image: url(../graphics/icons/page_edit.png);}
 .row-delete {background-image: url(../graphics/icons/delete.png);   }
 .table-refresh {
@@ -135,7 +137,7 @@ p, body
 
 
 /* Remove border radius from all buttons, accordions, search boxes etc that have rounded corners, add the class names to this */
-.panel-heading, .btn
+.panel-heading, .btn, .form-control
 {
     border-top-left-radius:0;
     border-top-right-radius:0;
@@ -154,6 +156,7 @@ p, body
     border-color:#f36007;
 }
 
+.btn:hover {color:white; background-color: #f36007;}
 
 
 a:link, a:visited { color:#f36007; }
