@@ -83,10 +83,10 @@ $(function () {
         }
         var data = {action: action, path: thePath};
 
-        console.log('Going to ',action, data.path);
+        //console.log('Going to ',action, data.path);
         $tr.find('td:first').html('<i class="fa fa-spinner fa-6"></i>');
         //if (action === 'delete' && !confirm("Are you sure?")) return true;
-        console.log('going to href',href, 'with params', $.param(data));
+        //console.log('going to href',href, 'with params', $.param(data));
         location.href = href + '?' + $.param(data);
 
         //$.get(href, data).then(function (data, textStatus, jqXHR) {
@@ -177,8 +177,10 @@ $(function () {
     // when in child frame of Pekoe Workspace
     if (gs.scope) { // Can only create a bookmark if this is in an iframe. Can only create a new Pekoe-tab if in Pekoe-workspace
         // override definition
+
+        gs.scope.tab.href = location.href; // Lovely. I could even update the title if I want!
+
         var openItem = function (tab, inNewTab) {
-            console.log('gs.scope.openitem tab.type',tab.type);
             if (tab.type === 'form' || inNewTab) {
                 gs.scope.addTab(tab); //
             } else if (tab.type === 'other' && tab.href.indexOf('odt:') == 0) { // TODO ------------ tidy up...
@@ -194,18 +196,13 @@ $(function () {
         $('tr.collection').on('dragenter',function(e){
             e.preventDefault();
             $(this).css('outline','solid red 1px');
-            //console.log('dragenter');
-            //console.log('thisis',this);
-//            $(e.target).background('red');
+
         }).on('dragover',function(e){
             e.originalEvent.dataTransfer.dropEffect='move';
             e.originalEvent.preventDefault();
-            //console.log('dragover')
         }).on('drop',function(e){
-            console.log('you dropped', e.originalEvent.target, 'onto',this); // you dropped td onto tr
             // now send a move event using the data.
             var data = e.originalEvent.dataTransfer.getData('application/json');
-            console.log('want to move ',data, 'into',$(this).data('href'));
             $(this).css('outline','');
         }).on('dragleave',function () {
             $(this).css('outline','');
@@ -223,13 +220,10 @@ $(function () {
         // NOTE: this is the HTML5 Drag and Drop API, NOT jQueryUI
         $('*[data-href]')
             .attr('draggable', true).on('dragstart', function (ev) {
-                console.log('ds');
                 ev.originalEvent.dataTransfer.effectAllowed="move";
                 ev.originalEvent.dataTransfer.setData('application/json', gs.angular.toJson(tabInfo($(ev.target)))); // Lovely - it works. Drag to Bookmarks in main frame.
             });
     }
-
-    $('table')
 
 });
 
