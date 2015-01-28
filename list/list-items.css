@@ -178,7 +178,7 @@ a:hover, a:active { text-decoration:underline; }
     color:#fff;
 }
 
-thead {
+thead, thead td {
     color: white;
     background-color: #666;
 }
