@@ -77,6 +77,7 @@ $(function () {
         var $tr = activeItem();
         var item = tabInfo($tr);
         var thePath = item.path;
+        if (!thePath || thePath === null || thePath === '') {return;}
         var confirmationRequired = $this.data('confirm'); // this could be a question
         if (confirmationRequired) {
             if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;}
