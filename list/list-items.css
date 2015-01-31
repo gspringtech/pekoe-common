@@ -178,7 +178,7 @@ a:hover, a:active { text-decoration:underline; }
     color:#fff;
 }
 
-thead, thead td {
+thead, thead td, thead th {
     color: white;
     background-color: #666;
 }
@@ -201,11 +201,11 @@ i {
     font-size: larger;
 }
 
-tr:hover {
+tbody tr:hover {
     background-color: #999;
     color: white;
 }
-tr:hover td { color: white;}
+tbody tr:hover td { color: white;}
 tr.active, tr.active td {
     background-color: #f36007 !important;
     color: white;

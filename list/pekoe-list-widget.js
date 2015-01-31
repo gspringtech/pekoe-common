@@ -98,6 +98,34 @@ $(function () {
         //
     });
 
+    $('.actionitem').on('click',function (e){
+        e.preventDefault();
+        //var action = $(this).text().toLowerCase(); // or what about the url?
+        var $this = $(this);
+        var href = $this.attr('href');
+        var params = $this.data('params');
+        var action = $this.data('action');
+
+        var confirmationRequired = $this.data('confirm'); // this could be a question
+        if (confirmationRequired) {
+            if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;}
+        }
+        var data = {action: action};
+
+        console.log('Going to ',action);
+        //$tr.find('td:first').html('<i class="fa fa-spinner fa-6"></i>');
+        //if (action === 'delete' && !confirm("Are you sure?")) return true;
+        //console.log('going to href',href, 'with params', $.param(data));
+        location.href = href + '?' + $.param(data);
+
+        //$.get(href, data).then(function (data, textStatus, jqXHR) {
+        //    if (jqXHR.getResponseHeader('Location')) {
+        //        location.href = jqXHR.getResponseHeader('Location');
+        //    }
+        //});
+        //
+    });
+
     $('#refresh').on('click', function () {
         location.reload();
     });
@@ -161,7 +189,7 @@ $(function () {
     //});
 
     // row-click actions
-    $('tr[data-href]')
+    $('tr[data-href]:not(.locked)')
         .on('click', function (e) {
             e.preventDefault();
             $('.active').removeClass('active');
@@ -170,6 +198,7 @@ $(function () {
         })
         .on('dblclick', function (e) {
             e.preventDefault();
+            //if ($(this).is('locked')) {return false;}
             var tab = tabInfo(activeItem());
             openItem(tabInfo(activeItem()), e.metaKey);
             return false;
