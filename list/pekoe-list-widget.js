@@ -193,6 +193,7 @@ $(function () {
     // row-click actions
     $('tr[data-href]')
         .on('click', function (e) {
+            if ($(e.target).is("a")) {return true; } // allow custom actions on cells.
             e.preventDefault();
             $('.active').removeClass('active');
             updateControls();
