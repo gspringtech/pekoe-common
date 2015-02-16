@@ -188,8 +188,10 @@ $(function () {
     //    });
     //});
 
+    // The PROBLEM with the row-click action is that it is impossible to do anything else with the row content.
+    // For example, a mailto would be nice. Or an expansion triangle to show associated files.
     // row-click actions
-    $('tr[data-href]:not(.locked)')
+    $('tr[data-href]')
         .on('click', function (e) {
             e.preventDefault();
             $('.active').removeClass('active');
@@ -198,7 +200,7 @@ $(function () {
         })
         .on('dblclick', function (e) {
             e.preventDefault();
-            //if ($(this).is('locked')) {return false;}
+            if ($(this).is('locked')) {return false;}
             var tab = tabInfo(activeItem());
             openItem(tabInfo(activeItem()), e.metaKey);
             return false;
