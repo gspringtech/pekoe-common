@@ -213,6 +213,9 @@ $(function () {
 
         gs.scope.tab.href = location.href; // Lovely. I could even update the title if I want!
 
+        // Not quite right yet.
+        // If the tab-type is the same as the current, then open in this tab.
+        // e.g. if this is a folder, then open in a folder.
         var openItem = function (tab, inNewTab) {
             if (tab.type === 'form' || inNewTab) {
                 gs.scope.addTab(tab); //
@@ -220,6 +223,9 @@ $(function () {
                 location.href = tab.href.split(":")[1];
             } else if (tab.type === 'other' && tab.href.indexOf('docx:') == 0) {
                 location.href = tab.href.split(":")[1];
+            } else if (tab.type === 'other') {
+                tab.type = 'report';
+                gs.scope.addTab(tab);
             }
              else {
                 location.href = tab.href;

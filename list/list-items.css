@@ -198,8 +198,12 @@ td {
     background-color: inherit;
 }
 
-i {
-    font-size: larger;
+.glyphicon {
+    font-size: 14pt;
+}
+
+i.fa {
+    font-size: 16pt;
 }
 
 tbody tr:hover {
