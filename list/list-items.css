@@ -199,11 +199,11 @@ td {
 }
 
 .glyphicon {
-    font-size: 14pt;
+    font-size: 14px;
 }
 
-i.fa {
-    font-size: 16pt;
+td i.fa {
+    font-size: 14px;
 }
 
 tbody tr:hover {
