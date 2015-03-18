@@ -210,7 +210,8 @@ tbody tr:hover {
     background-color: #999;
     color: white;
 }
-tbody tr:hover td { color: white;}
+tbody tr:hover td { color: white !important;}
+tbody tr:hover td a { color: white !important;}
 tr.active, tr.active td {
     background-color: #f36007 !important;
     color: white;
