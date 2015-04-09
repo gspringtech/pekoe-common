@@ -141,8 +141,8 @@ $(function () {
         tab.type = $tr.data('type');
         tab.path = $tr.data('path');
         //tab.class = $tr.class();
-        var params = $tr.data('params');
-        if (params) {tab.params = params};
+        var param = $tr.data('param');
+        if (param) {tab.param = param};
         return tab;
     };
 
