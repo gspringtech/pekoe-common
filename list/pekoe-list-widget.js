@@ -234,15 +234,35 @@ $(function () {
 
         $('tr.collection').on('dragenter',function(e){
             e.preventDefault();
-            $(this).css('outline','solid red 1px');
+            $(this).css('outline','solid red 2px');
 
         }).on('dragover',function(e){
             e.originalEvent.dataTransfer.dropEffect='move';
             e.originalEvent.preventDefault();
         }).on('drop',function(e){
             // now send a move event using the data.
-            var data = e.originalEvent.dataTransfer.getData('application/json');
-            $(this).css('outline','');
+            var $this = $(this);
+            $this.css('outline','');
+            if (!$this.hasClass('collection')) { // dummy check
+                console.log('Target is not a collection');
+                return;
+            }
+            var jsondata = e.originalEvent.dataTransfer.getData('application/json');
+            var data = JSON.parse(jsondata);
+
+
+
+            var resource = data.path;
+            var target = $this.data('path');
+
+            console.log('dropped',data,'to move',resource,  'into',target);
+
+            if (!confirm('Are you sure you want to move ' + resource + ' into folder ' + target )) {return true;}
+
+            var pathdata = {action: 'move', collection: target, resource: resource};
+
+            location.href = '/exist/pekoe-app/manage-files.xql?' + $.param(pathdata);
+
         }).on('dragleave',function () {
             $(this).css('outline','');
         });
