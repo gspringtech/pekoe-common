@@ -21,27 +21,6 @@ var gs;
 if (!gs) {
     gs = {};
 }
-//gs.cookies = document.cookie.split('; ');
-/*
- Leaving this ... code behind to remind me that Auth isn't right yet for this content. Still might want to use it here.
- Alternatives are:
- - make this an angular page (ugh!)
- - have a standard FORM which can be loaded (instead of the 401 page)
- */
-//gs.service = (function (){
-//    var s = {};
-//
-//    if (window.parent !== window) { // must be a child frame
-//        s = window.parent.AuthService;
-//    } else {
-//        s.getTenant = function () {
-//            return document.cookie;
-//        }
-//    }
-//    // console.log('service is',s);
-//    // who uses it?
-//    return s;
-//})();
 
 
 /*
@@ -83,24 +62,13 @@ $(function () {
             if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;}
         }
         var data = {action: action, path: thePath};
-
-        //console.log('Going to ',action, data.path);
         $tr.find('td:first').html('<i class="fa fa-spinner fa-6"></i>');
-        //if (action === 'delete' && !confirm("Are you sure?")) return true;
-        //console.log('going to href',href, 'with params', $.param(data));
         location.href = href + '?' + $.param(data);
 
-        //$.get(href, data).then(function (data, textStatus, jqXHR) {
-        //    if (jqXHR.getResponseHeader('Location')) {
-        //        location.href = jqXHR.getResponseHeader('Location');
-        //    }
-        //});
-        //
     });
 
     $('.actionitem').on('click',function (e){
         e.preventDefault();
-        //var action = $(this).text().toLowerCase(); // or what about the url?
         var $this = $(this);
         var href = $this.attr('href');
         var params = $this.data('params');
@@ -111,19 +79,7 @@ $(function () {
             if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;}
         }
         var data = {action: action};
-
-        console.log('Going to ',action);
-        //$tr.find('td:first').html('<i class="fa fa-spinner fa-6"></i>');
-        //if (action === 'delete' && !confirm("Are you sure?")) return true;
-        //console.log('going to href',href, 'with params', $.param(data));
         location.href = href + '?' + $.param(data);
-
-        //$.get(href, data).then(function (data, textStatus, jqXHR) {
-        //    if (jqXHR.getResponseHeader('Location')) {
-        //        location.href = jqXHR.getResponseHeader('Location');
-        //    }
-        //});
-        //
     });
 
     $('#refresh').on('click', function () {
@@ -136,10 +92,10 @@ $(function () {
 
     var tabInfo = function ($tr) {
         var tab = {};
-        tab.href = $tr.data('href');
-        tab.title = $tr.data('title');
-        tab.type = $tr.data('type');
-        tab.path = $tr.data('path');
+        tab.href = $tr.data('href'); // /exist/pekoe-app/files.xql?collection=/files/test-jobs
+        tab.title = $tr.data('title'); // test-jobs
+        tab.type = $tr.data('type'); // folder
+        tab.path = $tr.data('path'); // /files/test-jobs
         //tab.class = $tr.class();
         var param = $tr.data('param');
         if (param) {tab.param = param};
@@ -151,18 +107,6 @@ $(function () {
         location.href = tab.href;
     };
 
-    //// all the 'p-needs-selection' buttons should really do a get with their name as action
-    //$('unlockItem').on("click",function () {
-    //    var data = {action: 'unlock'};
-    //    var item = tabInfo(activeItem());
-    //    data.path = item.path;
-    //    console.log('Going to unlock ', data.path);
-    //    $.get(location.pathname, data).then(function (data, textStatus, jqXHR) {
-    //        if (jqXHR.getResponseHeader('Location')) {
-    //            location.href = jqXHR.getResponseHeader('Location');
-    //        }
-    //    });
-    //});
 
     // Buttons
     $('#openItem').on('click', function (e) {
@@ -176,17 +120,11 @@ $(function () {
     $('#bookmarkItem').on('click', function () {
 
     });
-    //$('#deleteItem').on('click', function () {
-    //    var data = {action: 'delete'};
-    //    var item = tabInfo(activeItem());
-    //    data.path = item.path;
-    //    console.log('Going to delete ', data.path);
-    //    $.post(location.pathname, data).then(function (data, textStatus, jqXHR) {
-    //        if (jqXHR.getResponseHeader('Location')) {
-    //            location.href = jqXHR.getResponseHeader('Location');
-    //        }
-    //    });
-    //});
+
+    // buttons with class pekoeTabButton and data-href, data-type, data-title (e.g. New Booking)
+    $('.pekoeTabButton').on('click', function () {
+        openItem($(this));
+    });
 
     // The PROBLEM with the row-click action is that it is impossible to do anything else with the row content.
     // For example, a mailto would be nice. Or an expansion triangle to show associated files.
@@ -213,7 +151,6 @@ $(function () {
 
         gs.scope.tab.href = location.href; // Lovely. I could even update the title if I want!
 
-        // Not quite right yet.
         // If the tab-type is the same as the current, then open in this tab.
         // e.g. if this is a folder, then open in a folder.
         var openItem = function (tab, inNewTab) {
@@ -266,6 +203,7 @@ $(function () {
         }).on('dragleave',function () {
             $(this).css('outline','');
         });
+
         /*
          function onDrop(event)
          {
