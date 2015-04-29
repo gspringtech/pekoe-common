@@ -123,7 +123,7 @@ $(function () {
 
     // buttons with class pekoeTabButton and data-href, data-type, data-title (e.g. New Booking)
     $('.pekoeTabButton').on('click', function () {
-        openItem($(this));
+        openItem(tabInfo($(this)));
     });
 
     // The PROBLEM with the row-click action is that it is impossible to do anything else with the row content.
