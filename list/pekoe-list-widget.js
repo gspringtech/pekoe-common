@@ -141,8 +141,8 @@ $(function () {
             e.preventDefault();
             var $active = activeItem();
             // TODO write a HEAD request that checks the file before attempting to open it.
-            if ($active.is('locked')) {return false;}
-            if ($active.is('locked-by-me')) {console.log('You have already opened this file.');}
+            if ($active.is('.locked')) {return false;}
+            if ($active.is('.locked-by-me')) {console.log('You have already opened this file.');}
 
             //if ($(this).is('locked')) {return false;}
             var tab = tabInfo(activeItem());
