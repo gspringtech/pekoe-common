@@ -139,9 +139,14 @@ $(function () {
         })
         .on('dblclick', function (e) {
             e.preventDefault();
-            if ($(this).is('locked')) {return false;}
+            var $active = activeItem();
+            // TODO write a HEAD request that checks the file before attempting to open it.
+            if ($active.is('locked')) {return false;}
+            if ($active.is('locked-by-me')) {console.log('You have already opened this file.');}
+
+            //if ($(this).is('locked')) {return false;}
             var tab = tabInfo(activeItem());
-            openItem(tabInfo(activeItem()), e.metaKey);
+            openItem(tab, e.metaKey);
             return false;
         });
 
@@ -154,6 +159,7 @@ $(function () {
         // If the tab-type is the same as the current, then open in this tab.
         // e.g. if this is a folder, then open in a folder.
         var openItem = function (tab, inNewTab) {
+
             if (tab.type === 'form' || inNewTab) {
                 gs.scope.addTab(tab); //
             } else if (tab.type === 'other' && tab.href.indexOf('odt:') == 0) { // TODO ------------ tidy up...
