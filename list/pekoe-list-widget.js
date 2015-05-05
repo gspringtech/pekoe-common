@@ -48,7 +48,8 @@ $(function () {
     // each action should return a redirect so that the action can't be repeated.
     $('.menuitem').on('click',function (e){
         e.preventDefault();
-        //var action = $(this).text().toLowerCase(); // or what about the url?
+        // what is the diff between this and the tab approach?
+        // I need to have a new tab.
         var $this = $(this);
         var href = $this.attr('href');
         var params = $this.data('params');
@@ -63,10 +64,22 @@ $(function () {
         }
         var data = {action: action, path: thePath};
         $tr.find('td:first').html('<i class="fa fa-spinner fa-6"></i>');
-        location.href = href + '?' + $.param(data);
+
+        // I really should be able to construct a tab here and pass this to openItem
+        var tab = {};
+        tab.href = href + '?' + $.param(data); // /exist/pekoe-app/files.xql?collection=/files/test-jobs
+        tab.title = $this.data('title'); // test-jobs
+        tab.type = $this.data('type'); // folder
+
+        openItem(tab);
+        //var param = $tr.data('param');
+        //if (param) {tab.param = param};
+
+
+        //location.href = href + '?' + $.param(data);
 
     });
-
+// what is the diff and where is this used? Possibly not used at all.
     $('.actionitem').on('click',function (e){
         e.preventDefault();
         var $this = $(this);
@@ -76,11 +89,15 @@ $(function () {
 
         var confirmationRequired = $this.data('confirm'); // this could be a question
         if (confirmationRequired) {
-            if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;}
+            if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;} // there is NO PATH !!!
         }
         var data = {action: action};
         location.href = href + '?' + $.param(data);
     });
+
+    /*
+    In addition to the .menuitem, i need some way to handle a
+     */
 
     $('#refresh').on('click', function () {
         location.reload();
@@ -116,6 +133,7 @@ $(function () {
     $('#openItemTab').on('click', function () {
         openItem(tabInfo(activeItem()), true);
     });
+
 
     $('#bookmarkItem').on('click', function () {
 
