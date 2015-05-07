@@ -48,6 +48,7 @@ $(function () {
     // each action should return a redirect so that the action can't be repeated.
     $('.menuitem').on('click',function (e){
         e.preventDefault();
+	console.log('got click');
         // what is the diff between this and the tab approach?
         // I need to have a new tab.
         var $this = $(this);
@@ -56,21 +57,22 @@ $(function () {
         var action = $this.data('action');
         var $tr = activeItem();
         var item = tabInfo($tr);
-        var thePath = item.path;
-        if (!thePath || thePath === null || thePath === '') {return;}
+        var thePath = item.path; // need to decide whether to use PATH or HREF - or both
+        if (!thePath || thePath === null || thePath === '') {console.warn('no path'); return;}
         var confirmationRequired = $this.data('confirm'); // this could be a question
         if (confirmationRequired) {
             if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;}
         }
         var data = {action: action, path: thePath};
         $tr.find('td:first').html('<i class="fa fa-spinner fa-6"></i>');
+// Things are confused at this point. 
 
         // I really should be able to construct a tab here and pass this to openItem
         var tab = {};
         tab.href = href + '?' + $.param(data); // /exist/pekoe-app/files.xql?collection=/files/test-jobs
         tab.title = $this.data('title'); // test-jobs
         tab.type = $this.data('type'); // folder
-
+	console.log('tab is ',tab);
         openItem(tab);
         //var param = $tr.data('param');
         //if (param) {tab.param = param};
