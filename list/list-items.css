@@ -89,7 +89,7 @@ tr[data-href] {
 .breadcrumb {
     text-transform: capitalize;
 }
-.glyphicon, .fa  {
+td>i.glyphicon, td>i.fa  {
     margin-right: 0.5em;
 }
 
