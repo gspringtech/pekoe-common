@@ -216,6 +216,13 @@ tr.active, tr.active td {
     background-color: #f36007 !important;
     color: white;
 }
+tr:hover button, tr:hover input {
+    color: black !important;
+}
+tr.active button, tr.active input {
+    color : black !important;
+}
+
 tr.active i.off {
     display: inline;
 }
