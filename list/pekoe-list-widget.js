@@ -146,6 +146,10 @@ $(function () {
         openItem(tabInfo($(this)));
     });
 
+    // allow the user to deselect
+    $('html').on('click', function () {
+	$('.active').removeClass('active');
+    });
     // The PROBLEM with the row-click action is that it is impossible to do anything else with the row content.
     // For example, a mailto would be nice. Or an expansion triangle to show associated files.
     // row-click actions
@@ -153,6 +157,7 @@ $(function () {
         .on('click', function (e) {
             if ($(e.target).is("a")) {return true; } // allow custom actions on cells.
             e.preventDefault();
+	    e.stopPropagation();
             $('.active').removeClass('active');
             updateControls();
             $(this).addClass('active');
