@@ -158,9 +158,10 @@ $(function () {
 
     // allow the user to deselect
     $('html').on('click', function (e) {
-	if (e.target.nodename !== 'html') return true;
+	if (e.target.nodeName !== 'HTML') return true;
 	$('.active').removeClass('active');
     });
+
     // The PROBLEM with the row-click action is that it is impossible to do anything else with the row content.
     // For example, a mailto would be nice. Or an expansion triangle to show associated files.
     // row-click actions
