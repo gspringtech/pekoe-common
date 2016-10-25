@@ -48,6 +48,7 @@ $(function () {
     // each action should return a redirect so that the action can't be repeated.
     $('.menuitem').on('click',function (e){
         e.preventDefault();
+	e.stopPropagation();
 	console.log('got click');
         // what is the diff between this and the tab approach?
         // I need to have a new tab.
@@ -81,9 +82,13 @@ $(function () {
         //location.href = href + '?' + $.param(data);
 
     });
-// what is the diff and where is this used? Possibly not used at all.
+// This kind of action doesn't need a selected file path
+// but it might need a parameter
+// e.g. 'Reports -> pekoe-app/Reports.xql
+// New Item -> show Modal
     $('.actionitem').on('click',function (e){
         e.preventDefault();
+	e.stopPropagation();
         var $this = $(this);
         var href = $this.attr('href');
         var params = $this.data('params');
@@ -91,8 +96,10 @@ $(function () {
 
         var confirmationRequired = $this.data('confirm'); // this could be a question
         if (confirmationRequired) {
-            if (!confirm('Are you sure you want to ' + action + ' the file ' + thePath)) {return true;} // there is NO PATH !!!
+            if (!confirm('Are you sure you want to ' + action)) {return true;} // there is NO PATH !!!
         }
+
+	// will need to add the current collection and any params.
         var data = {action: action};
         location.href = href + '?' + $.param(data);
     });
@@ -129,10 +136,12 @@ $(function () {
 
     // Buttons
     $('#openItem').on('click', function (e) {
+	e.stopPropagation();
         openItem(tabInfo(activeItem()), e.metaKey);
     });
 
-    $('#openItemTab').on('click', function () {
+    $('#openItemTab').on('click', function (e) {
+	e.stopPropagation();
         openItem(tabInfo(activeItem()), true);
     });
 
@@ -142,8 +151,15 @@ $(function () {
     });
 
     // buttons with class pekoeTabButton and data-href, data-type, data-title (e.g. New Booking)
-    $('.pekoeTabButton').on('click', function () {
+    $('.pekoeTabButton').on('click', function (e) {
+	e.stopPropagation();
         openItem(tabInfo($(this)));
+    });
+
+    // allow the user to deselect
+    $('html').on('click', function (e) {
+	if (e.target.nodeName !== 'HTML') return true;
+	$('.active').removeClass('active');
     });
 
     // The PROBLEM with the row-click action is that it is impossible to do anything else with the row content.
@@ -153,6 +169,7 @@ $(function () {
         .on('click', function (e) {
             if ($(e.target).is("a")) {return true; } // allow custom actions on cells.
             e.preventDefault();
+	    e.stopPropagation();
             $('.active').removeClass('active');
             updateControls();
             $(this).addClass('active');

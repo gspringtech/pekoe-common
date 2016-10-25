@@ -1,6 +1,16 @@
 /* The LIST-mode appearance  */
 /* XML file table row appearance. (Double-click to edit) */
 html {padding: 5px;}
+/*html { background-color: seashell;} */
+
+[draggable], [draggable] i {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+/*  cursor : pointer; only use pointer on items where the action is immediate - like Pekoe Bookmarks, Buttons, links  */
+ }
+
 .xml {
 
 }
@@ -81,10 +91,12 @@ tr.header {
 .number div {
     text-align: right;
 }
-tr[data-href] {
-    /*cursor: pointer;*/
+tr[data-href], [data-href] {
+    /* show normal arrow cursor - to indicate item is selectable */
+    cursor: default;
     -moz-user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 .breadcrumb {
     text-transform: capitalize;
